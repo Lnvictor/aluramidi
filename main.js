@@ -1,6 +1,22 @@
-function playTecla(tecla_name){
-    tecla_name = `#som_tecla_${tecla_name}`
-    console.log(tecla_name)
-    var pom = document.querySelector(tecla_name)
-    pom.play()
+function playKey(keyId){
+    var key = document.querySelector(keyId)
+    key.play()
 }
+
+const keysList = document.querySelectorAll('.tecla')
+
+keysList.forEach(key => {
+	const sound = key.classList[1];
+    const keyId = `#som_${sound}`;
+    key.onclick = function () { playKey(keyId) }
+
+    key.onkeydown = function (event) {
+        if (event.code == "Enter")
+         key.classList.add('ativa') 
+    }
+
+    key.onkeyup = function (event) { 
+        if (event.code == "Enter")
+            key.classList.remove('ativa') 
+    }
+});
